@@ -87,7 +87,7 @@ export default function Page() {
 
       <section className="closing section-pad"><div className="closing-orbit" /><div className="closing-content reveal"><span className="closing-kicker"><span className="live-dot" /> ONE PLANET. MANY SIGNALS.</span><h2>Look closer.<br />See <em>the change.</em></h2><p>We built SAR-Pulse to make a powerful new view of Earth feel a little more human—and a lot more possible.</p><button className="button-primary" onClick={() => goTo('crew')}>Meet the people behind it <ArrowDownRight size={16} /></button></div><div className="closing-index">A NASA SPACE APPS CHALLENGE PROJECT<br />EARTH OBSERVATION · 2026</div></section>
 
-      <CrewFooter light={!dark} onToggleTheme={toggleTheme} />
+      <CrewFooter />
       <div className="scroll-progress" aria-hidden="true"><span /></div>
     </main>
   )
