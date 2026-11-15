@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, MoveHorizontal } from "lucide-react";
@@ -33,10 +31,26 @@ export default function CrewFooter() {
         <p className="crew-footer-note">A small team, curious about<br />a very big planet.</p>
       </div>
 
-      <div
-        ref={railRef}
-        className={`crew-gallery${dragging ? " is-dragging" : ""}`}
-        aria-label="Team portraits. Drag or swipe to explore."
+      <div className="crew-gallery-shell">
+        <nav className="crew-look-nav" aria-label="Choose a team member">
+          <span>LOOKS</span>
+          {TEAM.map((member, index) => (
+            <button
+              key={member.id}
+              type="button"
+              className={activeIndex === index ? "is-active" : ""}
+              onClick={() => centerCard(index)}
+              aria-label={`Show ${member.name}`}
+              aria-current={activeIndex === index ? "true" : undefined}
+            >
+              0{index + 1}
+            </button>
+          ))}
+        </nav>
+        <div
+          ref={railRef}
+          className={`crew-gallery${dragging ? " is-dragging" : ""}`}
+          aria-label="Team portraits. Drag or swipe to explore."
         onPointerDown={(event) => {
           if (event.pointerType === "mouse") {
             pointerStart.current = { x: event.clientX, scrollLeft: event.currentTarget.scrollLeft };
@@ -53,9 +67,15 @@ export default function CrewFooter() {
           const rail = event.currentTarget;
           const center = rail.scrollLeft + rail.clientWidth / 2;
           let nearest = 0;
+          let nearestDistance = Number.POSITIVE_INFINITY;
           TEAM.forEach((_, index) => {
             const card = rail.querySelector<HTMLElement>(`[data-crew-card="${index}"]`);
-            if (card && Math.abs(card.offsetLeft + card.clientWidth / 2 - center) < Math.abs((rail.querySelector<HTMLElement>(`[data-crew-card="${nearest}"]`)?.offsetLeft ?? 0) - center)) nearest = index;
+            if (!card) return;
+            const distance = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
+            if (distance < nearestDistance) {
+              nearest = index;
+              nearestDistance = distance;
+            }
           });
           setActiveIndex(nearest);
         }}
@@ -84,6 +104,7 @@ export default function CrewFooter() {
             </motion.article>
           ))}
         </div>
+      </div>
       </div>
 
       <div className="crew-footer-bottom">
