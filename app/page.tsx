@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { ArrowDown, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, CircleHelp, Globe2, Menu, Moon, Satellite, Sun, Waves, X } from 'lucide-react'
+import LiveEarthDashboard from '@/components/live-earth-dashboard'
 
 const creators = [
   { name: 'Anandhu Krishnan', role: 'Project lead', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-14%20at%2019.22.34-JMqO1KGAaVAyOIB22BpsUwjYWNAOKE.jpeg', detail: 'Bringing the mission, the people and the story into focus.' },
@@ -62,7 +63,7 @@ export default function Page() {
       <header className="topbar">
         <a className="brand" href="#home" aria-label="SAR-Pulse home"><span className="brand-mark"><Satellite size={17} /></span><span>SAR<span className="brand-dash">—</span>PULSE</span></a>
         <nav className={menuOpen ? 'nav-links nav-open' : 'nav-links'} aria-label="Main navigation">
-          <button onClick={() => goTo('mission')}>The mission</button><button onClick={() => goTo('how-it-works')}>How it works</button><button onClick={() => goTo('impact')}>Why it matters</button><button onClick={() => goTo('crew')}>Our team</button>
+          <button onClick={() => goTo('live-data')}>Live map</button><button onClick={() => goTo('mission')}>The mission</button><button onClick={() => goTo('how-it-works')}>How it works</button><button onClick={() => goTo('impact')}>Why it matters</button><button onClick={() => goTo('crew')}>Our team</button>
         </nav>
         <div className="top-actions"><span className="mission-pill"><i /> NASA × ISRO · NISAR</span><button className="icon-button theme-button" onClick={toggleTheme} aria-label={`Switch to ${dark ? 'light' : 'dark'} theme`}>{dark ? <Sun size={17} /> : <Moon size={17} />}</button><button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button></div>
       </header>
@@ -74,6 +75,8 @@ export default function Page() {
         <div className="hero-caption"><span>01 / 05</span><span className="caption-line" /><span>OBSERVE · UNDERSTAND · ACT</span></div>
         <div className="hero-coordinates">34°03′N&nbsp; 118°15′W<br />EARTH · ORBIT 752 KM</div>
       </section>
+
+      <LiveEarthDashboard light={!dark} />
 
       <section className="mission section-pad" id="mission">
         <div className="section-kicker reveal"><span>01</span><span className="kicker-rule" /><span>THE MISSION</span></div>

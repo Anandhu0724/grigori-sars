@@ -39,10 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('sar-pulse-theme'); const dark = saved ? saved === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches; document.documentElement.classList.toggle('dark', dark); document.documentElement.classList.toggle('light', !dark); } catch {}` }} />
-      </head>
+    <html lang="en">
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
