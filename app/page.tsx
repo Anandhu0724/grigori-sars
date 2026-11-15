@@ -1,16 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, CircleHelp, Globe2, Menu, Moon, Satellite, Sun, Waves, X } from 'lucide-react'
+import { ArrowDown, ArrowDownRight, ArrowUpRight, Check, CircleHelp, Globe2, Menu, Moon, Satellite, Sun, Waves, X } from 'lucide-react'
 import LiveEarthDashboard from '@/components/live-earth-dashboard'
-
-const creators = [
-  { name: 'Anandhu Krishnan', role: 'Project lead', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-14%20at%2019.22.34-JMqO1KGAaVAyOIB22BpsUwjYWNAOKE.jpeg', detail: 'Bringing the mission, the people and the story into focus.' },
-  { name: 'Alen Shince', role: 'Research & development', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-14%20at%2018.24.47-Q62Cs6eWO7VfpJ5BoqhW5Z9kwC906A.jpeg', detail: 'Turning satellite observations into meaningful signals.' },
-  { name: 'Christy Rony', role: 'Data & science', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cb59d7e4-ea1d-47b5-9fa9-95a17ffdd9ef-WW7HneCrHnkJYLcNVglRUwUDrNe0DM.jpeg', detail: 'Exploring what radar can reveal about a changing Earth.' },
-  { name: 'Abhirami Achary', role: 'Experience & design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6bbde60b-8fc0-4e65-a4dc-dc8058b83865-l9m46MBishZDQyNsWcRWrLkZ6Tcaj6.jpeg', detail: 'Making complex earth science clear, inviting and human.' },
-  { name: 'Jaya Neeraja S', role: 'Story & impact', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-15%20at%2010.49.07-ndEa6gH71S1LFg5VRcizvLWADHjRlu.jpeg', detail: 'Connecting global observations to the communities they touch.' },
-]
+import CrewFooter from '@/components/crew-footer'
 
 const chapters = [
   { n: '01', title: 'A planet in motion.', text: 'Earth is always changing. Most of that change is too gradual, too vast, or too subtle to notice from the ground.', stat: 'EVERY DAY', label: 'the surface shifts' },
@@ -21,7 +14,6 @@ const chapters = [
 export default function Page() {
   const [dark, setDark] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeCreator, setActiveCreator] = useState(0)
 
   useEffect(() => {
     const saved = window.localStorage.getItem('sar-pulse-theme')
@@ -95,7 +87,7 @@ export default function Page() {
 
       <section className="closing section-pad"><div className="closing-orbit" /><div className="closing-content reveal"><span className="closing-kicker"><span className="live-dot" /> ONE PLANET. MANY SIGNALS.</span><h2>Look closer.<br />See <em>the change.</em></h2><p>We built SAR-Pulse to make a powerful new view of Earth feel a little more human—and a lot more possible.</p><button className="button-primary" onClick={() => goTo('crew')}>Meet the people behind it <ArrowDownRight size={16} /></button></div><div className="closing-index">A NASA SPACE APPS CHALLENGE PROJECT<br />EARTH OBSERVATION · 2026</div></section>
 
-      <footer className="crew-footer" id="crew"><div className="footer-head"><div><div className="section-kicker"><span>05</span><span className="kicker-rule" /><span>THE PEOPLE BEHIND THE PULSE</span></div><h2>Made by people<br />who <em>look closer.</em></h2></div><div className="crew-controls"><p>Five perspectives.<br />One shared curiosity.</p><div className="control-buttons"><button className="icon-button" onClick={() => setActiveCreator((activeCreator + creators.length - 1) % creators.length)} aria-label="Previous creator"><ArrowLeft size={16} /></button><button className="icon-button" onClick={() => setActiveCreator((activeCreator + 1) % creators.length)} aria-label="Next creator"><ArrowRight size={16} /></button></div></div></div><div className="crew-grid">{creators.map((creator, index) => <article className={`creator-card ${index === activeCreator ? 'creator-active' : ''}`} key={creator.name} onMouseEnter={() => setActiveCreator(index)}><div className="creator-image-wrap"><img src={creator.image} alt={`Portrait of ${creator.name}`} loading="lazy" /><span className="creator-index">0{index + 1}</span><span className="creator-image-arrow"><ArrowUpRight size={16} /></span></div><div className="creator-info"><p className="creator-role">{creator.role}</p><h3>{creator.name}</h3><p className="creator-detail">{creator.detail}</p></div></article>)}</div><div className="footer-bottom"><a className="brand" href="#home"><span className="brand-mark"><Satellite size={16} /></span><span>SAR<span className="brand-dash">—</span>PULSE</span></a><p>Dancing with the SARs · NASA Space Apps Challenge</p><span className="footer-credit">NASA / JPL-CALTECH · ISRO · EARTHDATA</span><a className="back-top" href="#home">BACK TO TOP <ArrowUpRight size={13} /></a></div></footer>
+      <CrewFooter light={!dark} onToggleTheme={toggleTheme} />
       <div className="scroll-progress" aria-hidden="true"><span /></div>
     </main>
   )
